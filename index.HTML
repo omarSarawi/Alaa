@@ -1,0 +1,1984 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AgriSmart | نظام الزراعة الذكية في وادي عربة</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #f5f7f2;
+        --bg2: #eef2e8;
+        --panel: #ffffff;
+        --border: rgba(39, 120, 68, 0.15);
+        --border2: rgba(39, 120, 68, 0.35);
+        --green: #1e7a3e;
+        --green-light: #27ae60;
+        --green-pale: #e8f5ee;
+        --teal: #0e9f8e;
+        --teal-pale: #e0f7f4;
+        --amber: #d97706;
+        --amber-pale: #fef3c7;
+        --blue: #2563eb;
+        --blue-pale: #dbeafe;
+        --rose: #dc2626;
+        --rose-pale: #fee2e2;
+        --violet: #7c3aed;
+        --violet-pale: #ede9fe;
+        --ink: #111f16;
+        --ink-mid: #3b5e47;
+        --ink-dim: #7a9f87;
+        --mono: "Space Mono", monospace;
+        --font: "Cairo", sans-serif;
+        --r: 12px;
+        --shadow: 0 4px 24px rgba(30, 122, 62, 0.1);
+        --shadow-lg: 0 12px 48px rgba(30, 122, 62, 0.14);
+      }
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family: var(--font);
+        background: var(--bg);
+        color: var(--ink);
+        line-height: 1.75;
+        overflow-x: hidden;
+      }
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background-image:
+          radial-gradient(
+            circle at 18% 22%,
+            rgba(30, 122, 62, 0.06) 0%,
+            transparent 38%
+          ),
+          radial-gradient(
+            circle at 82% 70%,
+            rgba(14, 159, 142, 0.05) 0%,
+            transparent 35%
+          );
+        pointer-events: none;
+        z-index: 0;
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      /* TOPBAR */
+      .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: rgba(245, 247, 242, 0.93);
+        backdrop-filter: blur(18px);
+        border-bottom: 1px solid var(--border2);
+        box-shadow: 0 2px 16px rgba(30, 122, 62, 0.07);
+      }
+      .topbar-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        width: min(1200px, calc(100% - 32px));
+        margin: 0 auto;
+        min-height: 66px;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex-shrink: 0;
+      }
+      .brand-mark {
+        width: 42px;
+        height: 42px;
+        border-radius: 10px;
+        background: var(--green);
+        display: grid;
+        place-items: center;
+        font-weight: 900;
+        font-size: 1.15rem;
+        color: #fff;
+        box-shadow: 0 4px 16px rgba(30, 122, 62, 0.35);
+      }
+      .brand-text strong {
+        display: block;
+        font-size: 1rem;
+        font-weight: 900;
+        color: var(--ink);
+      }
+      .brand-text span {
+        display: block;
+        font-size: 0.7rem;
+        font-weight: 700;
+        color: var(--teal);
+        font-family: var(--mono);
+      }
+      .nav-pills {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        overflow-x: auto;
+        scrollbar-width: none;
+        padding: 8px 0;
+      }
+      .nav-pills::-webkit-scrollbar {
+        display: none;
+      }
+      .nav-pills a {
+        padding: 7px 14px;
+        border-radius: 999px;
+        font-size: 0.82rem;
+        font-weight: 800;
+        color: var(--ink-mid);
+        white-space: nowrap;
+        border: 1px solid transparent;
+        transition: all 200ms;
+      }
+      .nav-pills a:hover,
+      .nav-pills a.active {
+        background: var(--green-pale);
+        border-color: var(--border2);
+        color: var(--green);
+      }
+      .progress-bar {
+        height: 3px;
+        background: linear-gradient(
+          90deg,
+          var(--green),
+          var(--teal),
+          var(--amber)
+        );
+        width: 0%;
+        transition: width 100ms linear;
+      }
+
+      /* LAYOUT */
+      .section {
+        position: relative;
+        z-index: 1;
+        padding: 96px 0;
+        border-bottom: 1px solid var(--border);
+      }
+      .section.alt {
+        background: rgba(255, 255, 255, 0.55);
+      }
+      .container {
+        width: min(1200px, calc(100% - 32px));
+        margin: 0 auto;
+      }
+      .kicker {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-family: var(--mono);
+        font-size: 0.72rem;
+        color: var(--green);
+        letter-spacing: 0.06em;
+        margin-bottom: 14px;
+      }
+      .kicker::before {
+        content: "";
+        width: 20px;
+        height: 2px;
+        background: var(--green);
+        border-radius: 2px;
+      }
+      h1 {
+        font-size: clamp(2.6rem, 5.5vw, 4.6rem);
+        font-weight: 900;
+        line-height: 1.12;
+        color: var(--ink);
+      }
+      h2 {
+        font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+        font-weight: 900;
+        line-height: 1.15;
+        color: var(--ink);
+      }
+      h3 {
+        font-size: 1.02rem;
+        font-weight: 800;
+        color: var(--ink);
+      }
+      .lead {
+        color: var(--ink-mid);
+        font-size: 1.05rem;
+        font-weight: 600;
+      }
+      .section-head {
+        margin-bottom: 48px;
+      }
+      .fade-up {
+        opacity: 0;
+        transform: translateY(26px);
+        transition:
+          opacity 650ms ease,
+          transform 650ms ease;
+      }
+      .fade-up.in-view {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* HERO */
+      #cover {
+        min-height: 92svh;
+        display: flex;
+        align-items: center;
+        padding-top: 32px;
+      }
+      .hero-inner {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 26px;
+        max-width: 840px;
+        margin: 0 auto;
+      }
+
+      /* Teacher badge — links to video */
+      .teacher-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        padding: 11px 22px 11px 16px;
+        background: var(--panel);
+        border: 2px solid var(--green);
+        border-radius: 999px;
+        box-shadow: 0 4px 20px rgba(30, 122, 62, 0.18);
+        font-size: 1rem;
+        font-weight: 800;
+        color: var(--ink);
+        transition: all 220ms;
+        cursor: pointer;
+      }
+      .teacher-badge:hover {
+        background: var(--green);
+        color: #fff;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 28px rgba(30, 122, 62, 0.35);
+      }
+      .tb-icon {
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        background: var(--green-pale);
+        display: grid;
+        place-items: center;
+        font-size: 1.1rem;
+        flex-shrink: 0;
+        transition: background 220ms;
+      }
+      .teacher-badge:hover .tb-icon {
+        background: rgba(255, 255, 255, 0.25);
+      }
+      .tb-label {
+        font-size: 0.73rem;
+        font-weight: 700;
+        color: var(--ink-dim);
+        display: block;
+        transition: color 220ms;
+      }
+      .teacher-badge:hover .tb-label {
+        color: rgba(255, 255, 255, 0.7);
+      }
+      .tb-name {
+        display: block;
+      }
+      .tb-play {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        font-size: 0.78rem;
+        font-weight: 800;
+        color: var(--green);
+        transition: color 220ms;
+      }
+      .teacher-badge:hover .tb-play {
+        color: #fff;
+      }
+      .tb-play::before {
+        content: "▶";
+        font-size: 0.7rem;
+      }
+
+      .hero-title .accent {
+        color: var(--green);
+      }
+      .hero-desc {
+        max-width: 620px;
+        color: var(--ink-mid);
+        font-size: 1.1rem;
+        font-weight: 600;
+      }
+
+      .hero-actions {
+        display: flex;
+        gap: 14px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 13px 26px;
+        border-radius: var(--r);
+        font-weight: 900;
+        font-size: 0.92rem;
+        font-family: var(--font);
+        border: 2px solid transparent;
+        cursor: pointer;
+        transition: all 200ms;
+      }
+      .btn-primary {
+        background: var(--green);
+        color: #fff;
+        border-color: var(--green);
+        box-shadow: 0 6px 24px rgba(30, 122, 62, 0.3);
+      }
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 32px rgba(30, 122, 62, 0.4);
+        background: var(--green-light);
+      }
+      .btn-ghost {
+        background: var(--panel);
+        color: var(--ink);
+        border-color: var(--border2);
+      }
+      .btn-ghost:hover {
+        background: var(--green-pale);
+        border-color: var(--green);
+        color: var(--green);
+      }
+
+      .hero-stats {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .stat-pill {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 18px;
+        background: var(--panel);
+        border: 1px solid var(--border2);
+        border-radius: 999px;
+        box-shadow: var(--shadow);
+      }
+      .stat-pill .num {
+        font-family: var(--mono);
+        font-size: 1.15rem;
+        font-weight: 700;
+      }
+      .stat-pill .lbl {
+        font-size: 0.82rem;
+        font-weight: 700;
+        color: var(--ink-dim);
+      }
+
+      .hero-visual {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+        width: 100%;
+        max-width: 660px;
+      }
+      .hv-card {
+        background: var(--panel);
+        border: 1px solid var(--border2);
+        border-radius: var(--r);
+        padding: 20px 14px;
+        text-align: center;
+        box-shadow: var(--shadow);
+        position: relative;
+        overflow: hidden;
+      }
+      .hv-card::before {
+        content: "";
+        position: absolute;
+        inset-inline: 0;
+        top: 0;
+        height: 4px;
+      }
+      .hv-card.c1::before {
+        background: linear-gradient(90deg, var(--green), var(--teal));
+      }
+      .hv-card.c2::before {
+        background: linear-gradient(90deg, var(--amber), var(--rose));
+      }
+      .hv-card.c3::before {
+        background: linear-gradient(90deg, var(--blue), var(--violet));
+      }
+      .hv-icon {
+        font-size: 2rem;
+        margin-bottom: 8px;
+      }
+      .hv-label {
+        font-size: 0.78rem;
+        font-weight: 800;
+        color: var(--ink-mid);
+      }
+      .hv-val {
+        font-family: var(--mono);
+        font-size: 1rem;
+        font-weight: 700;
+        margin-top: 4px;
+      }
+
+      /* CONCEPT */
+      .two-col {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 54px;
+        align-items: center;
+      }
+      .challenge-cards {
+        display: grid;
+        gap: 14px;
+      }
+      .challenge-card {
+        display: flex;
+        gap: 16px;
+        padding: 18px 20px;
+        background: var(--panel);
+        border: 1px solid var(--border2);
+        border-radius: var(--r);
+        box-shadow: var(--shadow);
+        transition:
+          transform 200ms,
+          box-shadow 200ms;
+      }
+      .challenge-card:hover {
+        transform: translateY(-3px);
+        box-shadow: var(--shadow-lg);
+      }
+      .ch-icon {
+        width: 44px;
+        height: 44px;
+        border-radius: 10px;
+        display: grid;
+        place-items: center;
+        font-size: 1.3rem;
+        flex-shrink: 0;
+      }
+      .challenge-card p {
+        font-size: 0.87rem;
+        color: var(--ink-mid);
+        font-weight: 600;
+        margin-top: 4px;
+      }
+
+      .flow-steps {
+        display: grid;
+      }
+      .flow-step {
+        display: grid;
+        grid-template-columns: 52px 1fr;
+      }
+      .step-line {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .step-num {
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        font-family: var(--mono);
+        font-size: 0.8rem;
+        font-weight: 700;
+        color: #fff;
+        flex-shrink: 0;
+      }
+      .step-connector {
+        width: 2px;
+        flex: 1;
+        min-height: 20px;
+        background: var(--border2);
+        margin: 4px auto;
+      }
+      .flow-step:last-child .step-connector {
+        display: none;
+      }
+      .step-body {
+        padding: 2px 0 26px 16px;
+      }
+      .step-body h3 {
+        font-size: 0.97rem;
+        margin-bottom: 4px;
+      }
+      .step-body p {
+        font-size: 0.87rem;
+        color: var(--ink-mid);
+        font-weight: 600;
+      }
+      .s1 .step-num {
+        background: var(--blue);
+      }
+      .s2 .step-num {
+        background: var(--amber);
+      }
+      .s3 .step-num {
+        background: var(--green);
+      }
+      .s4 .step-num {
+        background: var(--teal);
+      }
+
+      /* HARDWARE */
+      .hw-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+      }
+      .hw-card {
+        background: var(--panel);
+        border: 1px solid var(--border2);
+        border-radius: var(--r);
+        padding: 24px 20px;
+        box-shadow: var(--shadow);
+        position: relative;
+        overflow: hidden;
+        transition:
+          transform 200ms,
+          box-shadow 200ms;
+      }
+      .hw-card:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-lg);
+      }
+      .hw-card::before {
+        content: "";
+        position: absolute;
+        inset-inline: 0;
+        top: 0;
+        height: 4px;
+      }
+      .hw-card.g::before {
+        background: var(--green);
+      }
+      .hw-card.b::before {
+        background: var(--blue);
+      }
+      .hw-card.a::before {
+        background: var(--amber);
+      }
+      .hw-card.t::before {
+        background: var(--teal);
+      }
+      .hw-card.r::before {
+        background: var(--rose);
+      }
+      .hw-card.v::before {
+        background: var(--violet);
+      }
+      .hw-icon {
+        width: 50px;
+        height: 50px;
+        border-radius: 10px;
+        display: grid;
+        place-items: center;
+        font-size: 1.5rem;
+        margin-bottom: 14px;
+      }
+      .hw-card h3 {
+        font-size: 0.95rem;
+        margin-bottom: 8px;
+      }
+      .hw-card p {
+        font-size: 0.85rem;
+        color: var(--ink-mid);
+        font-weight: 600;
+        line-height: 1.6;
+      }
+      .hw-tag {
+        margin-top: 12px;
+        display: inline-block;
+        padding: 3px 10px;
+        border-radius: 5px;
+        font-family: var(--mono);
+        font-size: 0.68rem;
+        font-weight: 700;
+      }
+
+      /* HYDRO TABLE */
+      .hydro-table {
+        background: var(--panel);
+        border: 1px solid var(--border2);
+        border-radius: var(--r);
+        overflow: hidden;
+        box-shadow: var(--shadow);
+      }
+      .hydro-table-head {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        background: var(--green);
+        color: #fff;
+      }
+      .hydro-table-head span {
+        padding: 14px 20px;
+        font-weight: 800;
+        font-size: 0.9rem;
+      }
+      .hydro-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        border-bottom: 1px solid var(--border);
+      }
+      .hydro-row:last-child {
+        border-bottom: none;
+      }
+      .hydro-row span {
+        padding: 13px 20px;
+        font-size: 0.88rem;
+        font-weight: 700;
+      }
+      .hydro-row .lbl {
+        color: var(--ink-mid);
+      }
+      .hydro-row .bad {
+        color: var(--rose);
+      }
+      .hydro-row .good {
+        color: var(--green);
+      }
+
+      /* THRESHOLDS */
+      .th-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+      }
+      .th-card {
+        background: var(--panel);
+        border: 1px solid var(--border2);
+        border-radius: var(--r);
+        padding: 24px;
+        box-shadow: var(--shadow);
+      }
+      .th-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 12px;
+      }
+      .th-badge {
+        font-family: var(--mono);
+        font-size: 0.82rem;
+        font-weight: 700;
+        padding: 5px 12px;
+        border-radius: 7px;
+      }
+      .th-note {
+        font-size: 0.87rem;
+        color: var(--ink-mid);
+        font-weight: 600;
+      }
+      .th-gauge {
+        height: 8px;
+        background: var(--bg2);
+        border-radius: 999px;
+        overflow: hidden;
+        margin: 14px 0 6px;
+      }
+      .th-fill {
+        height: 100%;
+        border-radius: 999px;
+      }
+      .th-range {
+        display: flex;
+        justify-content: space-between;
+        font-family: var(--mono);
+        font-size: 0.67rem;
+        color: var(--ink-dim);
+      }
+
+      /* CIRCUIT */
+      .circuit-wrap {
+        display: grid;
+        grid-template-columns: 1fr 300px;
+        gap: 24px;
+        align-items: start;
+      }
+      .circuit-card {
+        background: var(--panel);
+        border: 1px solid var(--border2);
+        border-radius: var(--r);
+        overflow: hidden;
+        box-shadow: var(--shadow-lg);
+      }
+      .specs-stack {
+        display: grid;
+        gap: 14px;
+      }
+      .spec-box {
+        background: var(--panel);
+        border: 1px solid var(--border2);
+        border-radius: var(--r);
+        overflow: hidden;
+        box-shadow: var(--shadow);
+      }
+      .spec-box-head {
+        padding: 10px 16px;
+        background: var(--bg2);
+        border-bottom: 1px solid var(--border);
+        font-family: var(--mono);
+        font-size: 0.72rem;
+        font-weight: 700;
+        color: var(--ink-mid);
+      }
+      .spec-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 16px;
+        border-bottom: 1px solid var(--border);
+        font-size: 0.85rem;
+      }
+      .spec-row:last-child {
+        border-bottom: none;
+      }
+      .spec-lbl {
+        color: var(--ink-mid);
+        font-weight: 700;
+      }
+      .spec-val {
+        font-family: var(--mono);
+        font-size: 0.75rem;
+        font-weight: 700;
+        padding: 3px 8px;
+        border-radius: 5px;
+      }
+      .vg {
+        background: var(--green-pale);
+        color: var(--green);
+      }
+      .vb {
+        background: var(--blue-pale);
+        color: var(--blue);
+      }
+      .va {
+        background: var(--amber-pale);
+        color: var(--amber);
+      }
+      .vt {
+        background: var(--teal-pale);
+        color: var(--teal);
+      }
+      .vv {
+        background: var(--violet-pale);
+        color: var(--violet);
+      }
+
+      /* VIDEO */
+      .video-wrap {
+        position: relative;
+        padding-bottom: 56.25%;
+        border-radius: 16px;
+        overflow: hidden;
+        border: 2px solid var(--border2);
+        box-shadow: var(--shadow-lg);
+      }
+      .video-wrap video {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .video-actions {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-top: 20px;
+        flex-wrap: wrap;
+      }
+
+      /* THANKS */
+      #thanks {
+        min-height: 65vh;
+        display: flex;
+        align-items: center;
+        text-align: center;
+      }
+      .thanks-wrap {
+        max-width: 680px;
+        margin: 0 auto;
+      }
+      .thanks-wrap h2 {
+        font-size: clamp(2.2rem, 4.5vw, 3.6rem);
+        margin: 16px 0 14px;
+      }
+      .thanks-chips {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 36px;
+      }
+      .t-chip {
+        padding: 12px 20px;
+        background: var(--panel);
+        border: 1px solid var(--border2);
+        border-radius: 999px;
+        font-weight: 800;
+        font-size: 0.88rem;
+        box-shadow: var(--shadow);
+        color: var(--ink-mid);
+      }
+
+      /* RESPONSIVE */
+      @media (max-width: 900px) {
+        .two-col,
+        .circuit-wrap {
+          grid-template-columns: 1fr;
+        }
+        .hw-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .th-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      @media (max-width: 580px) {
+        .hw-grid,
+        .hero-visual {
+          grid-template-columns: 1fr 1fr;
+        }
+        h2 {
+          font-size: 1.7rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="topbar-inner">
+        <div class="brand">
+          <div class="brand-mark">A</div>
+          <div class="brand-text">
+            <strong>AgriSmart</strong>
+            <span>WADI_ARABA_SYSTEM</span>
+          </div>
+        </div>
+        <nav class="nav-pills">
+          <a href="#cover">الرئيسية</a>
+          <a href="#concept">المبدأ</a>
+          <a href="#hardware">المكونات</a>
+          <a href="#hydro">الأثر الوطني</a>
+          <a href="#commands">المعايير</a>
+          <a href="#circuit">الدائرة</a>
+          <a href="#video">الفيديو</a>
+          <a href="#thanks">Q&A</a>
+        </nav>
+      </div>
+      <div class="progress-bar" id="progressBar"></div>
+    </header>
+
+    <main>
+      <section class="section" id="cover">
+        <div class="container">
+          <div class="hero-inner fade-up">
+            <a class="teacher-badge" href="#video">
+              <div class="tb-icon">👩‍🏫</div>
+              <div>
+                <span class="tb-label">إعداد المعلمة</span>
+                <span class="tb-name">آلاء الصراوي</span>
+              </div>
+              <div style="flex: 1"></div>
+              <span class="tb-play">شاهد الفيديو</span>
+            </a>
+
+            <h1>
+              نظام الزراعة الذكية<br /><span class="accent"
+                >في وادي عربة</span
+              >
+            </h1>
+
+            <p class="hero-desc">
+              نظام استشعار كيميائي حيوي يعتمد على <strong>ESP32</strong> وتقنيات
+              إنترنت الأشياء لمراقبة خصائص التربة وتوفير حتى
+              <strong>50%</strong> من المياه الجوفية وتقليل الأملاح.
+            </p>
+
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="#concept">🌱 شرح المبدأ</a>
+              <a class="btn btn-ghost" href="#hardware">⚙️ المكونات</a>
+              <a class="btn btn-ghost" href="#video">▶ الفيديو</a>
+            </div>
+
+            <div class="hero-stats">
+              <div class="stat-pill">
+                <span class="num" style="color: var(--green)">50%</span
+                ><span class="lbl">توفير مياه</span>
+              </div>
+              <div class="stat-pill">
+                <span class="num" style="color: var(--teal)">EC</span
+                ><span class="lbl">تقليل الأملاح</span>
+              </div>
+              <div class="stat-pill">
+                <span class="num" style="color: var(--amber)">24/7</span
+                ><span class="lbl">مراقبة لحظية</span>
+              </div>
+            </div>
+
+            <div class="hero-visual">
+              <div class="hv-card c1">
+                <div class="hv-icon">💧</div>
+                <div class="hv-label">رطوبة التربة</div>
+                <div class="hv-val" style="color: var(--green)">Soil Moist</div>
+              </div>
+              <div class="hv-card c2">
+                <div class="hv-icon">⚗️</div>
+                <div class="hv-label">EC &amp; pH</div>
+                <div class="hv-val" style="color: var(--amber)">Chemical</div>
+              </div>
+              <div class="hv-card c3">
+                <div class="hv-icon">📡</div>
+                <div class="hv-label">إنترنت الأشياء</div>
+                <div class="hv-val" style="color: var(--blue)">IoT WiFi</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section alt" id="concept">
+        <div class="container">
+          <div class="section-head fade-up">
+            <div class="kicker">01 — CONCEPT</div>
+            <h2>تحديات وادي عربة ومبدأ العمل</h2>
+            <p class="lead">
+              يواجه وادي عربة تحديات مناخية وبيئية كبرى يعالجها النظام الذكي
+            </p>
+          </div>
+          <div class="two-col">
+            <div class="challenge-cards fade-up">
+              <div class="challenge-card">
+                <div class="ch-icon" style="background: var(--blue-pale)">
+                  🧱
+                </div>
+                <div>
+                  <h3>التحدي الفيزيائي (مسامية التربة)</h3>
+                  <p>
+                    تربة وادي عربة رملية ذات مسامية عالية، مما يقلل قدرتها على الاحتفاظ بالمياه، ويزيد معدلات التبخر بسبب الحرارة العالية.
+                  </p>
+                </div>
+              </div>
+              <div class="challenge-card">
+                <div class="ch-icon" style="background: var(--amber-pale)">
+                  ⚡
+                </div>
+                <div>
+                  <h3>التحدي الكيميائي (تراكم الأملاح)</h3>
+                  <p>
+                    درجات الحرارة المرتفعة تراكم الأملاح وترفع الموصلية (EC)، مما يسبب الجفاف الفسيولوجي وصعوبة امتصاص المياه للجذور.
+                  </p>
+                </div>
+              </div>
+              <div class="challenge-card">
+                <div class="ch-icon" style="background: var(--rose-pale)">
+                  🧪
+                </div>
+                <div>
+                  <h3>غسيل العناصر الغذائية</h3>
+                  <p>
+                    المسامية العالية تغسل العناصر (النيتروجين، الفوسفور) بعيداً عن الجذور، مما يرفع الكلفة ويقلل كفاءة التسميد.
+                  </p>
+                </div>
+              </div>
+              <div class="challenge-card">
+                <div class="ch-icon" style="background: var(--green-pale)">
+                  🧬
+                </div>
+                <div>
+                  <h3>التحدي الحيوي</h3>
+                  <p>
+                    يؤثر الإجهاد المائي والملحي على نشاط الكائنات الدقيقة النافعة، مما يضعف خصوبة التربة وإنتاجيتها.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="flow-steps fade-up">
+              <div class="flow-step s1">
+                <div class="step-line">
+                  <div class="step-num">01</div>
+                  <div class="step-connector"></div>
+                </div>
+                <div class="step-body">
+                  <h3>قراءة الحساسات من التربة</h3>
+                  <p>يقيس النظام الرطوبة الفعلية للتربة، وEC، وpH بشكل لحظي ومستمر.</p>
+                </div>
+              </div>
+              <div class="flow-step s2">
+                <div class="step-line">
+                  <div class="step-num">02</div>
+                  <div class="step-connector"></div>
+                </div>
+                <div class="step-body">
+                  <h3>معالجة البيانات (ESP32)</h3>
+                  <p>
+                    يحلل الميكروكنترولر القراءات لتحديد الاحتياج المائي الحقيقي للنبات دون زيادة.
+                  </p>
+                </div>
+              </div>
+              <div class="flow-step s3">
+                <div class="step-line">
+                  <div class="step-num">03</div>
+                  <div class="step-connector"></div>
+                </div>
+                <div class="step-body">
+                  <h3>الإرسال السحابي (IoT)</h3>
+                  <p>
+                    رفع البيانات للداشبورد عبر WiFi لمراقبة مزرعة وادي عربة من أي مكان.
+                  </p>
+                </div>
+              </div>
+              <div class="flow-step s4">
+                <div class="step-line">
+                  <div class="step-num">04</div>
+                  <div class="step-connector"></div>
+                </div>
+                <div class="step-body">
+                  <h3>التسميد بالري (Fertigation)</h3>
+                  <p>
+                    تفعيل صمامات المياه والأسمدة تلقائياً بكميات دقيقة لمنع الهدر وغسيل التربة.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="hardware">
+        <div class="container">
+          <div class="section-head fade-up">
+            <div class="kicker">02 — HARDWARE</div>
+            <h2>المكونات الإلكترونية</h2>
+            <p class="lead">ستة مكونات رئيسية مصممة لتحمل بيئة وادي عربة القاسية</p>
+          </div>
+          <div class="hw-grid">
+            <article class="hw-card g fade-up">
+              <div class="hw-icon" style="background: var(--green-pale)">
+                🧠
+              </div>
+              <h3>ESP32 Microcontroller</h3>
+              <p>
+                العقل المدبر للنظام، يعالج البيانات ويربط المزرعة بشبكة الإنترنت لتحقيق إنترنت الأشياء (IoT).
+              </p>
+              <span
+                class="hw-tag"
+                style="background: var(--green-pale); color: var(--green)"
+                >240MHz — WiFi</span
+              >
+            </article>
+            <article class="hw-card b fade-up">
+              <div class="hw-icon" style="background: var(--blue-pale)">💧</div>
+              <h3>Soil Moisture Sensor</h3>
+              <p>يحدد السعة الحقلية للتربة الرملية ليمنع الفاقد المائي الناتج عن الري الزائد.</p>
+              <span
+                class="hw-tag"
+                style="background: var(--blue-pale); color: var(--blue)"
+                >Analog OUT</span
+              >
+            </article>
+            <article class="hw-card a fade-up">
+              <div class="hw-icon" style="background: var(--amber-pale)">
+                ⚡
+              </div>
+              <h3>Soil EC Sensor</h3>
+              <p>
+                يراقب مستويات تراكم الأملاح في الطبقات السطحية لمنع التملح السطحي والجفاف الفسيولوجي.
+              </p>
+              <span
+                class="hw-tag"
+                style="background: var(--amber-pale); color: var(--amber)"
+                >Salinity Monitor</span
+              >
+            </article>
+            <article class="hw-card t fade-up">
+              <div class="hw-icon" style="background: var(--teal-pale)">🧪</div>
+              <h3>Soil pH Sensor</h3>
+              <p>
+                يقيس حموضة التربة لضمان امتصاص العناصر الغذائية بأعلى
+                كفاءة من قبل جذور النبات.
+              </p>
+              <span
+                class="hw-tag"
+                style="background: var(--teal-pale); color: var(--teal)"
+                >Range: 0–14</span
+              >
+            </article>
+            <article class="hw-card r fade-up">
+              <div class="hw-icon" style="background: var(--rose-pale)">🌡️</div>
+              <h3>Temp Sensor</h3>
+              <p>
+                يراقب درجات حرارة التربة والمحيط للتنبؤ بمعدلات التبخر السريعة في بيئة وادي عربة.
+              </p>
+              <span
+                class="hw-tag"
+                style="background: var(--rose-pale); color: var(--rose)"
+                >Weather Data</span
+              >
+            </article>
+            <article class="hw-card v fade-up">
+              <div class="hw-icon" style="background: var(--violet-pale)">
+                ⚙️
+              </div>
+              <h3>Relays & Smart Valves</h3>
+              <p>
+                مرحلات لقيادة مضخات المياه وصمامات الأسمدة لضخ كميات دقيقة دون تسرب عميق.
+              </p>
+              <span
+                class="hw-tag"
+                style="background: var(--violet-pale); color: var(--violet)"
+                >Fertigation Control</span
+              >
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section alt" id="hydro">
+        <div class="container">
+          <div class="section-head fade-up">
+            <div class="kicker">03 — NATIONAL IMPACT</div>
+            <h2>الأثر التنموي في وادي عربة</h2>
+            <p class="lead">
+              مقارنة بين طرق الزراعة التقليدية والزراعة الذكية الموجهة بالبيانات
+            </p>
+          </div>
+          <div class="hydro-table fade-up">
+            <div class="hydro-table-head">
+              <span>المعيار</span>
+              <span>🌾 الزراعة التقليدية المفتوحة</span>
+              <span>💧 الزراعة الذكية IoT</span>
+            </div>
+            <div class="hydro-row">
+              <span class="lbl">استهلاك المياه الجوفية</span
+              ><span class="bad">هدر بنسبة 30-50%</span
+              ><span class="good">توفير يصل لـ 50%</span>
+            </div>
+            <div class="hydro-row">
+              <span class="lbl">تراكم الأملاح (EC)</span
+              ><span class="bad">عالي بسبب التبخر المستمر</span
+              ><span class="good">منخفض بفضل الري الدقيق</span>
+            </div>
+            <div class="hydro-row">
+              <span class="lbl">غسيل الأسمدة</span
+              ><span class="bad">فقدان للعناصر في التربة الرملية</span
+              ><span class="good">تسميد بالري (Fertigation) دقيق</span>
+            </div>
+            <div class="hydro-row">
+              <span class="lbl">الأمن الغذائي</span
+              ><span class="bad">معرض لتقلبات المناخ</span
+              ><span class="good">مستدام وعالي الجودة التصديرية</span>
+            </div>
+            <div class="hydro-row">
+              <span class="lbl">الهوية الوطنية</span
+              ><span class="bad">تقليدية</span
+              ><span class="good">تربط التطور التكنولوجي بخدمة الأرض</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="commands">
+        <div class="container">
+          <div class="section-head fade-up">
+            <div class="kicker">04 — SYSTEM_LOGIC</div>
+            <h2>المعايير البرمجية والحدود الحرجة</h2>
+            <p class="lead">
+              القيم المرجعية للتربة التي يراقبها النظام ويتخذ القرارات بناءً عليها
+            </p>
+          </div>
+          <div class="th-grid">
+            <div class="th-card fade-up">
+              <div class="th-head">
+                <h3>💧 السعة الحقلية للتربة</h3>
+                <span
+                  class="th-badge"
+                  style="background: var(--blue-pale); color: var(--blue)"
+                  >< 35%</span
+                >
+              </div>
+              <p class="th-note">
+                عند انخفاض رطوبة التربة الرملية عن 35%، يفعل النظام الري فوراً لمنع ذبول النباتات.
+              </p>
+              <div class="th-gauge">
+                <div
+                  class="th-fill"
+                  style="width: 35%; background: var(--blue)"
+                ></div>
+              </div>
+              <div class="th-range">
+                <span>0%</span><span>⬆ حد التشغيل الطارئ</span><span>100%</span>
+              </div>
+            </div>
+            <div class="th-card fade-up">
+              <div class="th-head">
+                <h3>⚡ الموصلية الكهربائية (EC)</h3>
+                <span
+                  class="th-badge"
+                  style="background: var(--amber-pale); color: var(--amber)"
+                  >> 2.5 mS</span
+                >
+              </div>
+              <p class="th-note">
+                تجاوز الـ 2.5 يعني بدء تراكم الأملاح السطحية، مما يتطلب تفعيل دورة "غسيل الأملاح".
+              </p>
+              <div class="th-gauge">
+                <div
+                  class="th-fill"
+                  style="width: 75%; background: var(--amber)"
+                ></div>
+              </div>
+              <div class="th-range">
+                <span>0</span><span>⬆ حد الخطر وتراكم الملح</span><span>4.0</span>
+              </div>
+            </div>
+            <div class="th-card fade-up">
+              <div class="th-head">
+                <h3>🧪 حموضة التربة (pH)</h3>
+                <span
+                  class="th-badge"
+                  style="background: var(--green-pale); color: var(--green)"
+                  >6.0 – 7.0</span
+                >
+              </div>
+              <p class="th-note">
+                النطاق المثالي لامتصاص جذور النباتات للعناصر الكبرى (NPK) بأعلى كفاءة في التربة.
+              </p>
+              <div class="th-gauge">
+                <div
+                  class="th-fill"
+                  style="width: 65%; background: var(--green)"
+                ></div>
+              </div>
+              <div class="th-range">
+                <span>0</span><span>⬆ 6.0 – 7.0 النطاق الذهبي</span><span>14</span>
+              </div>
+            </div>
+            <div class="th-card fade-up">
+              <div class="th-head">
+                <h3>🌱 التسميد بالري (Fertigation)</h3>
+                <span
+                  class="th-badge"
+                  style="background: var(--rose-pale); color: var(--rose)"
+                  >تلقائي</span
+                >
+              </div>
+              <p class="th-note">
+                يقوم النظام بضخ الأسمدة المذابة مع مياه الري بنسب دقيقة تتناسب مع حاجة النبات لتقليل الغسيل.
+              </p>
+              <div class="th-gauge">
+                <div
+                  class="th-fill"
+                  style="width: 100%; background: var(--rose)"
+                ></div>
+              </div>
+              <div class="th-range">
+                <span>Off</span><span>دمج السماد مع الماء</span><span>On</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section alt" id="circuit">
+        <div class="container">
+          <div class="section-head fade-up">
+            <div class="kicker">05 — CIRCUIT</div>
+            <h2>البنية الإلكترونية والتوصيلات</h2>
+            <p class="lead">
+              مخطط هندسي لتوصيل حساسات التربة والمضخات بمتحكم ESP32
+            </p>
+          </div>
+          <div class="circuit-wrap fade-up">
+            <div class="circuit-card">
+              <svg
+                viewBox="0 0 660 480"
+                xmlns="http://www.w3.org/2000/svg"
+                style="background: #f8fdf9; display: block; width: 100%"
+              >
+                <defs>
+                  <pattern
+                    id="gg"
+                    width="22"
+                    height="22"
+                    patternUnits="userSpaceOnUse"
+                  >
+                    <path
+                      d="M22 0L0 0 0 22"
+                      fill="none"
+                      stroke="rgba(30,122,62,0.07)"
+                      stroke-width="0.5"
+                    />
+                  </pattern>
+                  <marker
+                    id="arr"
+                    viewBox="0 0 10 10"
+                    refX="8"
+                    refY="5"
+                    markerWidth="5"
+                    markerHeight="5"
+                    orient="auto"
+                  >
+                    <path
+                      d="M2 2L8 5L2 8"
+                      fill="none"
+                      stroke="context-stroke"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                    />
+                  </marker>
+                </defs>
+                <rect width="660" height="480" fill="url(#gg)" />
+                <rect
+                  x="230"
+                  y="178"
+                  width="200"
+                  height="124"
+                  rx="10"
+                  fill="#e8f5ee"
+                  stroke="#1e7a3e"
+                  stroke-width="2"
+                />
+                <text
+                  x="330"
+                  y="228"
+                  text-anchor="middle"
+                  font-family="Cairo,sans-serif"
+                  font-size="15"
+                  font-weight="800"
+                  fill="#1e7a3e"
+                >
+                  ESP32
+                </text>
+                <text
+                  x="330"
+                  y="247"
+                  text-anchor="middle"
+                  font-family="Space Mono,monospace"
+                  font-size="9"
+                  fill="#3b5e47"
+                >
+                  MICROCONTROLLER
+                </text>
+                <text
+                  x="330"
+                  y="263"
+                  text-anchor="middle"
+                  font-family="Space Mono,monospace"
+                  font-size="9"
+                  fill="#3b5e47"
+                >
+                  WiFi 2.4GHz · 240MHz
+                </text>
+                <text
+                  x="330"
+                  y="283"
+                  text-anchor="middle"
+                  font-family="Space Mono,monospace"
+                  font-size="9"
+                  fill="#27ae60"
+                >
+                  ● ONLINE
+                </text>
+                <rect
+                  x="22"
+                  y="24"
+                  width="152"
+                  height="50"
+                  rx="8"
+                  fill="#dbeafe"
+                  stroke="#2563eb"
+                  stroke-width="1.3"
+                />
+                <text
+                  x="98"
+                  y="44"
+                  text-anchor="middle"
+                  font-family="Cairo,sans-serif"
+                  font-size="12"
+                  font-weight="800"
+                  fill="#1d4ed8"
+                >
+                  حساس الرطوبة
+                </text>
+                <text
+                  x="98"
+                  y="60"
+                  text-anchor="middle"
+                  font-family="Space Mono,monospace"
+                  font-size="9"
+                  fill="#2563eb"
+                >
+                  Moisture → PIN 34
+                </text>
+                <rect
+                  x="22"
+                  y="100"
+                  width="152"
+                  height="50"
+                  rx="8"
+                  fill="#fef3c7"
+                  stroke="#d97706"
+                  stroke-width="1.3"
+                />
+                <text
+                  x="98"
+                  y="120"
+                  text-anchor="middle"
+                  font-family="Cairo,sans-serif"
+                  font-size="12"
+                  font-weight="800"
+                  fill="#b45309"
+                >
+                  حساس EC
+                </text>
+                <text
+                  x="98"
+                  y="136"
+                  text-anchor="middle"
+                  font-family="Space Mono,monospace"
+                  font-size="9"
+                  fill="#d97706"
+                >
+                  EC Probe → PIN 35
+                </text>
+                <rect
+                  x="22"
+                  y="176"
+                  width="152"
+                  height="50"
+                  rx="8"
+                  fill="#e0f7f4"
+                  stroke="#0e9f8e"
+                  stroke-width="1.3"
+                />
+                <text
+                  x="98"
+                  y="196"
+                  text-anchor="middle"
+                  font-family="Cairo,sans-serif"
+                  font-size="12"
+                  font-weight="800"
+                  fill="#0e9f8e"
+                >
+                  حساس pH
+                </text>
+                <text
+                  x="98"
+                  y="212"
+                  text-anchor="middle"
+                  font-family="Space Mono,monospace"
+                  font-size="9"
+                  fill="#0e9f8e"
+                >
+                  pH Probe → PIN 36
+                </text>
+                <rect
+                  x="22"
+                  y="252"
+                  width="152"
+                  height="50"
+                  rx="8"
+                  fill="#fee2e2"
+                  stroke="#dc2626"
+                  stroke-width="1.3"
+                />
+                <text
+                  x="98"
+                  y="272"
+                  text-anchor="middle"
+                  font-family="Cairo,sans-serif"
+                  font-size="12"
+                  font-weight="800"
+                  fill="#dc2626"
+                >
+                  حساس الحرارة
+                </text>
+                <text
+                  x="98"
+                  y="288"
+                  text-anchor="middle"
+                  font-family="Space Mono,monospace"
+                  font-size="9"
+                  fill="#dc2626"
+                >
+                  Temp → PIN 4
+                </text>
+                <rect
+                  x="486"
+                  y="24"
+                  width="152"
+                  height="50"
+                  rx="8"
+                  fill="#fff7ed"
+                  stroke="#ea580c"
+                  stroke-width="1.3"
+                />
+                <text
+                  x="562"
+                  y="44"
+                  text-anchor="middle"
+                  font-family="Cairo,sans-serif"
+                  font-size="12"
+                  font-weight="800"
+                  fill="#c2410c"
+                >
+                  مضخة المياه
+                </text>
+                <text
+                  x="562"
+                  y="60"
+                  text-anchor="middle"
+                  font-family="Space Mono,monospace"
+                  font-size="9"
+                  fill="#ea580c"
+                >
+                  Relay CH1 → 12V
+                </text>
+                <rect
+                  x="486"
+                  y="100"
+                  width="152"
+                  height="50"
+                  rx="8"
+                  fill="#fff7ed"
+                  stroke="#ea580c"
+                  stroke-width="1.3"
+                />
+                <text
+                  x="562"
+                  y="120"
+                  text-anchor="middle"
+                  font-family="Cairo,sans-serif"
+                  font-size="12"
+                  font-weight="800"
+                  fill="#c2410c"
+                >
+                  صمام الأسمدة
+                </text>
+                <text
+                  x="562"
+                  y="136"
+                  text-anchor="middle"
+                  font-family="Space Mono,monospace"
+                  font-size="9"
+                  fill="#ea580c"
+                >
+                  Relay CH2 → 5V
+                </text>
+                <rect
+                  x="486"
+                  y="176"
+                  width="152"
+                  height="50"
+                  rx="8"
+                  fill="#fff7ed"
+                  stroke="#ea580c"
+                  stroke-width="1.3"
+                />
+                <text
+                  x="562"
+                  y="196"
+                  text-anchor="middle"
+                  font-family="Cairo,sans-serif"
+                  font-size="12"
+                  font-weight="800"
+                  fill="#c2410c"
+                >
+                  مضخة احتياطية
+                </text>
+                <text
+                  x="562"
+                  y="212"
+                  text-anchor="middle"
+                  font-family="Space Mono,monospace"
+                  font-size="9"
+                  fill="#ea580c"
+                >
+                  Relay CH3 → 5V
+                </text>
+                <rect
+                  x="340"
+                  y="360"
+                  width="170"
+                  height="76"
+                  rx="8"
+                  fill="#ede9fe"
+                  stroke="#7c3aed"
+                  stroke-width="1.5"
+                />
+                <text
+                  x="425"
+                  y="387"
+                  text-anchor="middle"
+                  font-family="Cairo,sans-serif"
+                  font-size="12"
+                  font-weight="800"
+                  fill="#7c3aed"
+                >
+                  Relay Module
+                </text>
+                <text
+                  x="425"
+                  y="403"
+                  text-anchor="middle"
+                  font-family="Space Mono,monospace"
+                  font-size="9"
+                  fill="#6d28d9"
+                >
+                  4-Channel · 5V
+                </text>
+                <text
+                  x="425"
+                  y="420"
+                  text-anchor="middle"
+                  font-family="Space Mono,monospace"
+                  font-size="9"
+                  fill="#7c3aed"
+                >
+                  GPIO 25, 26, 27
+                </text>
+                <rect
+                  x="148"
+                  y="376"
+                  width="150"
+                  height="60"
+                  rx="8"
+                  fill="#fef3c7"
+                  stroke="#d97706"
+                  stroke-width="1.5"
+                />
+                <text
+                  x="223"
+                  y="402"
+                  text-anchor="middle"
+                  font-family="Cairo,sans-serif"
+                  font-size="12"
+                  font-weight="800"
+                  fill="#b45309"
+                >
+                  مصدر الطاقة
+                </text>
+                <text
+                  x="223"
+                  y="420"
+                  text-anchor="middle"
+                  font-family="Space Mono,monospace"
+                  font-size="9"
+                  fill="#d97706"
+                >
+                  12V → Buck → 5V
+                </text>
+                <line
+                  x1="174"
+                  y1="49"
+                  x2="230"
+                  y2="222"
+                  stroke="#2563eb"
+                  stroke-width="1.3"
+                  stroke-dasharray="5 3"
+                  marker-end="url(#arr)"
+                />
+                <line
+                  x1="174"
+                  y1="125"
+                  x2="230"
+                  y2="232"
+                  stroke="#d97706"
+                  stroke-width="1.3"
+                  stroke-dasharray="5 3"
+                  marker-end="url(#arr)"
+                />
+                <line
+                  x1="174"
+                  y1="201"
+                  x2="230"
+                  y2="242"
+                  stroke="#0e9f8e"
+                  stroke-width="1.3"
+                  stroke-dasharray="5 3"
+                  marker-end="url(#arr)"
+                />
+                <line
+                  x1="174"
+                  y1="277"
+                  x2="230"
+                  y2="252"
+                  stroke="#dc2626"
+                  stroke-width="1.3"
+                  stroke-dasharray="5 3"
+                  marker-end="url(#arr)"
+                />
+                <line
+                  x1="330"
+                  y1="302"
+                  x2="420"
+                  y2="360"
+                  stroke="#7c3aed"
+                  stroke-width="1.6"
+                  marker-end="url(#arr)"
+                />
+                <line
+                  x1="510"
+                  y1="360"
+                  x2="562"
+                  y2="150"
+                  stroke="#ea580c"
+                  stroke-width="1.3"
+                  stroke-dasharray="4 3"
+                  marker-end="url(#arr)"
+                />
+                <line
+                  x1="515"
+                  y1="362"
+                  x2="562"
+                  y2="226"
+                  stroke="#ea580c"
+                  stroke-width="1.3"
+                  stroke-dasharray="4 3"
+                />
+                <line
+                  x1="298"
+                  y1="376"
+                  x2="330"
+                  y2="302"
+                  stroke="#d97706"
+                  stroke-width="1.8"
+                  marker-end="url(#arr)"
+                />
+                <text
+                  x="330"
+                  y="152"
+                  text-anchor="middle"
+                  font-family="Space Mono,monospace"
+                  font-size="9"
+                  fill="#1e7a3e"
+                >
+                  ↑ WiFi → IoT Cloud Dashboard
+                </text>
+                <line
+                  x1="330"
+                  y1="158"
+                  x2="330"
+                  y2="178"
+                  stroke="#1e7a3e"
+                  stroke-width="1.2"
+                  stroke-dasharray="3 2"
+                  marker-end="url(#arr)"
+                />
+              </svg>
+            </div>
+            <div class="specs-stack">
+              <div class="spec-box">
+                <div class="spec-box-head">🔌 توصيلات الحساسات</div>
+                <div class="spec-row">
+                  <span class="spec-lbl">رطوبة</span
+                  ><span class="spec-val vb">PIN 34</span>
+                </div>
+                <div class="spec-row">
+                  <span class="spec-lbl">EC</span
+                  ><span class="spec-val va">PIN 35</span>
+                </div>
+                <div class="spec-row">
+                  <span class="spec-lbl">pH</span
+                  ><span class="spec-val vt">PIN 36</span>
+                </div>
+                <div class="spec-row">
+                  <span class="spec-lbl">حرارة</span
+                  ><span class="spec-val vv">PIN 4</span>
+                </div>
+              </div>
+              <div class="spec-box">
+                <div class="spec-box-head">⚙️ المشغّلات</div>
+                <div class="spec-row">
+                  <span class="spec-lbl">مضخة مياه</span
+                  ><span class="spec-val vg">Relay CH1</span>
+                </div>
+                <div class="spec-row">
+                  <span class="spec-lbl">صمام أسمدة</span
+                  ><span class="spec-val vg">Relay CH2</span>
+                </div>
+                <div class="spec-row">
+                  <span class="spec-lbl">مضخة احتياط</span
+                  ><span class="spec-val vg">Relay CH3</span>
+                </div>
+              </div>
+              <div class="spec-box">
+                <div class="spec-box-head">⚡ الطاقة</div>
+                <div class="spec-row">
+                  <span class="spec-lbl">مضخة رئيسية</span
+                  ><span class="spec-val va">12V DC</span>
+                </div>
+                <div class="spec-row">
+                  <span class="spec-lbl">ESP32</span
+                  ><span class="spec-val vt">5V USB</span>
+                </div>
+                <div class="spec-row">
+                  <span class="spec-lbl">بروتوكول</span
+                  ><span class="spec-val vv">WiFi 2.4G</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="video">
+        <div class="container">
+          <div class="section-head fade-up">
+            <div class="kicker">06 — DEMO</div>
+            <h2>فيديو توضيحي</h2>
+            <p class="lead">
+              عرض مرئي لعمل النظام الزراعي الذكي وقراءة الحساسات على أرض الواقع.
+            </p>
+          </div>
+          <div class="fade-up">
+            <div class="video-wrap">
+              <video controls>
+                <source src="abeer.mp4" type="video/mp4" />
+                متصفحك لا يدعم تشغيل الفيديو.
+              </video>
+            </div>
+            <div class="video-actions">
+              <a class="btn btn-ghost" href="#cover">↑ العودة للأعلى</a>
+              <a class="btn btn-ghost" href="#thanks">التالي: الأسئلة &larr;</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section alt" id="thanks">
+        <div class="container">
+          <div class="thanks-wrap fade-up">
+            <div class="kicker" style="justify-content: center">
+              07 — Q&amp;A
+            </div>
+            <h2>شكراً لوقتكم الكريم 🌱</h2>
+            <p class="lead">
+              هكذا نربط الهوية الوطنية بحماية الأرض والمياه — يسعدني الإجابة على أي سؤال!
+            </p>
+            <div style="margin-top: 24px">
+              <a class="btn btn-primary" href="#cover">↑ العودة للبداية</a>
+            </div>
+            <div class="thanks-chips">
+              <div class="t-chip">💧 توفير 50% مياه</div>
+              <div class="t-chip">🌾 حماية التربة الرملية</div>
+              <div class="t-chip">📡 مراقبة 24/7 عبر الإنترنت</div>
+              <div class="t-chip">🇯🇴 تعزيز الهوية الوطنية</div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      const bar = document.getElementById("progressBar");
+      window.addEventListener(
+        "scroll",
+        () => {
+          bar.style.width =
+            Math.min(
+              100,
+              (window.scrollY /
+                (document.documentElement.scrollHeight - innerHeight)) *
+                100,
+            ) + "%";
+        },
+        { passive: true },
+      );
+
+      new IntersectionObserver(
+        (entries) =>
+          entries.forEach(
+            (e) => e.isIntersecting && e.target.classList.add("in-view"),
+          ),
+        { threshold: 0.1 },
+      ).observe.bind(
+        new IntersectionObserver(
+          (entries) =>
+            entries.forEach(
+              (e) => e.isIntersecting && e.target.classList.add("in-view"),
+            ),
+          { threshold: 0.1 },
+        ),
+      );
+
+      const fadeObs = new IntersectionObserver(
+        (entries) =>
+          entries.forEach(
+            (e) => e.isIntersecting && e.target.classList.add("in-view"),
+          ),
+        { threshold: 0.1 },
+      );
+      document
+        .querySelectorAll(".fade-up")
+        .forEach((el) => fadeObs.observe(el));
+
+      const navLinks = document.querySelectorAll(".nav-pills a");
+      const sections = [...document.querySelectorAll("main .section")];
+      const navObs = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (!e.isIntersecting) return;
+            navLinks.forEach((a) =>
+              a.classList.toggle(
+                "active",
+                a.getAttribute("href") === "#" + e.target.id,
+              ),
+            );
+          });
+        },
+        { rootMargin: "-45% 0px -45% 0px" },
+      );
+      sections.forEach((s) => navObs.observe(s));
+
+      document.addEventListener("keydown", (e) => {
+        const cur = sections.findIndex((s) => {
+          const r = s.getBoundingClientRect();
+          return r.top <= innerHeight * 0.5 && r.bottom >= innerHeight * 0.5;
+        });
+        if (e.key === "ArrowDown" || e.key === "PageDown") {
+          e.preventDefault();
+          sections[Math.min(sections.length - 1, cur + 1)]?.scrollIntoView({
+            behavior: "smooth",
+          });
+        }
+        if (e.key === "ArrowUp" || e.key === "PageUp") {
+          e.preventDefault();
+          sections[Math.max(0, cur - 1)]?.scrollIntoView({
+            behavior: "smooth",
+          });
+        }
+      });
+    </script>
+  </body>
+</html>
