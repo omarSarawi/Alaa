@@ -464,15 +464,37 @@
     .vv { background:var(--violet-pale); color:var(--violet); }
 
     /* ═══════════════════════════════════════
-       VIDEO
+       VIDEO SECTION (الجديد والمعدل)
     ═══════════════════════════════════════ */
-    .video-wrap {
-      position: relative; padding-bottom: 56.25%;
-      border-radius: 16px; overflow: hidden;
-      border: 2px solid var(--border2); box-shadow: var(--sh-lg);
+    .video-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      padding: 20px 0;
     }
-    .video-wrap video { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
-    .video-actions { display: flex; align-items: center; gap: 12px; margin-top: 20px; flex-wrap: wrap; }
+    
+    .video-wrap {
+      display: inline-block;
+      max-width: 100%;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 4px solid var(--border2);
+      box-shadow: var(--sh-lg);
+      background-color: #000;
+    }
+
+    .video-wrap video {
+      display: block;
+      max-width: 100%;
+      /* تقييد أقصى ارتفاع لكي لا يكون الفيديو أطول من الشاشة */
+      max-height: 75vh;
+      width: auto;
+      height: auto;
+      object-fit: contain; /* للتأكد من عدم قص أي جزء من الفيديو */
+    }
+
+    .video-actions { display: flex; align-items: center; justify-content: center; gap: 12px; margin-top: 20px; flex-wrap: wrap; }
 
     /* ═══════════════════════════════════════
        THANKS
@@ -507,7 +529,6 @@
 </head>
 <body>
 
-  <!-- ══ TOPBAR ══ -->
   <header class="topbar">
     <div class="topbar-inner">
       <div class="brand">
@@ -533,14 +554,10 @@
 
   <main>
 
-    <!-- ══════════════════════════════════════
-         01 — HERO
-    ══════════════════════════════════════ -->
     <section class="section" id="cover">
       <div class="container">
         <div class="hero-wrap">
 
-          <!-- Left: copy -->
           <div class="fade-up">
             <a class="teacher-pill" href="#video">
               <div class="tp-avatar">👩‍🏫</div>
@@ -585,7 +602,6 @@
             </div>
           </div>
 
-          <!-- Right: Wadi Araba info -->
           <div class="wadi-cards fade-up">
             <div class="wadi-intro">
               <h3>📍 وادي عربة — جنوب الأردن</h3>
@@ -622,9 +638,6 @@
       </div>
     </section>
 
-    <!-- ══════════════════════════════════════
-         02 — PROBLEM
-    ══════════════════════════════════════ -->
     <section class="section alt" id="problem">
       <div class="container">
         <div class="section-head fade-up">
@@ -686,9 +699,6 @@
       </div>
     </section>
 
-    <!-- ══════════════════════════════════════
-         03 — SOLUTION
-    ══════════════════════════════════════ -->
     <section class="section" id="solution">
       <div class="container">
         <div class="section-head fade-up">
@@ -746,7 +756,6 @@
           </div>
         </div>
 
-        <!-- Results strip -->
         <div class="result-strip fade-up">
           <div class="rs-card rs-c1">
             <div class="rs-icon">💧</div>
@@ -772,9 +781,6 @@
       </div>
     </section>
 
-    <!-- ══════════════════════════════════════
-         04 — HARDWARE
-    ══════════════════════════════════════ -->
     <section class="section alt" id="hardware">
       <div class="container">
         <div class="section-head fade-up">
@@ -829,9 +835,6 @@
       </div>
     </section>
 
-    <!-- ══════════════════════════════════════
-         05 — LOGIC / HOW IT WORKS
-    ══════════════════════════════════════ -->
     <section class="section" id="logic">
       <div class="container">
         <div class="section-head fade-up">
@@ -903,9 +906,6 @@
       </div>
     </section>
 
-    <!-- ══════════════════════════════════════
-         06 — CIRCUIT
-    ══════════════════════════════════════ -->
     <section class="section alt" id="circuit">
       <div class="container">
         <div class="section-head fade-up">
@@ -926,7 +926,6 @@
               </defs>
               <rect width="680" height="500" fill="url(#gg)"/>
 
-              <!-- ESP32 center -->
               <rect x="240" y="185" width="200" height="130" rx="10" fill="#e4f5ec" stroke="#1a6b38" stroke-width="2"/>
               <text x="340" y="232" text-anchor="middle" font-family="Cairo,sans-serif" font-size="15" font-weight="900" fill="#1a6b38">ESP32</text>
               <text x="340" y="251" text-anchor="middle" font-family="Space Mono,monospace" font-size="9" fill="#2e5239">MICROCONTROLLER</text>
@@ -934,7 +933,6 @@
               <text x="340" y="285" text-anchor="middle" font-family="Space Mono,monospace" font-size="9" fill="#2e5239">4MB Flash · GPIO 34+</text>
               <text x="340" y="304" text-anchor="middle" font-family="Space Mono,monospace" font-size="9" fill="#22913f">● ONLINE — وادي عربة</text>
 
-              <!-- Sensors Left side -->
               <rect x="22" y="26"  width="160" height="52" rx="8" fill="#dce8fb" stroke="#1e5fcc" stroke-width="1.3"/>
               <text x="102" y="46"  text-anchor="middle" font-family="Cairo,sans-serif"    font-size="12" font-weight="800" fill="#1e5fcc">حساس الرطوبة</text>
               <text x="102" y="64"  text-anchor="middle" font-family="Space Mono,monospace" font-size="9"  fill="#1e5fcc">Moisture → PIN 34</text>
@@ -951,7 +949,6 @@
               <text x="102" y="292" text-anchor="middle" font-family="Cairo,sans-serif"    font-size="12" font-weight="800" fill="#c0243a">حساس الحرارة</text>
               <text x="102" y="310" text-anchor="middle" font-family="Space Mono,monospace" font-size="9"  fill="#c0243a">DHT22 → PIN 4</text>
 
-              <!-- Actuators Right side -->
               <rect x="498" y="26"  width="160" height="52" rx="8" fill="#fff4e6" stroke="#c05020" stroke-width="1.3"/>
               <text x="578" y="46"  text-anchor="middle" font-family="Cairo,sans-serif"    font-size="12" font-weight="800" fill="#a03010">مضخة الري الرئيسية</text>
               <text x="578" y="64"  text-anchor="middle" font-family="Space Mono,monospace" font-size="9"  fill="#c05020">Relay CH1 → 12V DC</text>
@@ -964,35 +961,28 @@
               <text x="578" y="210" text-anchor="middle" font-family="Cairo,sans-serif"    font-size="12" font-weight="800" fill="#a03010">مضخة تصحيح pH</text>
               <text x="578" y="228" text-anchor="middle" font-family="Space Mono,monospace" font-size="9"  fill="#c05020">pH Correct → CH3</text>
 
-              <!-- Relay module -->
               <rect x="356" y="375" width="174" height="80" rx="8" fill="#ece4fb" stroke="#6b2fc9" stroke-width="1.5"/>
               <text x="443" y="402" text-anchor="middle" font-family="Cairo,sans-serif"    font-size="13" font-weight="800" fill="#6b2fc9">Relay Module</text>
               <text x="443" y="419" text-anchor="middle" font-family="Space Mono,monospace" font-size="9"  fill="#6b2fc9">4-Channel · 5V Input</text>
               <text x="443" y="436" text-anchor="middle" font-family="Space Mono,monospace" font-size="9"  fill="#6b2fc9">GPIO 25, 26, 27</text>
 
-              <!-- Power supply -->
               <rect x="154" y="388" width="158" height="58" rx="8" fill="#fdf2dc" stroke="#c8933a" stroke-width="1.5"/>
               <text x="233" y="413" text-anchor="middle" font-family="Cairo,sans-serif"    font-size="12" font-weight="800" fill="#8c5e18">مصدر الطاقة</text>
               <text x="233" y="430" text-anchor="middle" font-family="Space Mono,monospace" font-size="9"  fill="#c8933a">12V → Buck → 5V</text>
 
-              <!-- WiFi cloud label -->
               <text x="340" y="154" text-anchor="middle" font-family="Space Mono,monospace" font-size="9" fill="#1a6b38">↑  WiFi  →  IoT Dashboard  →  هاتف المزارع</text>
               <line x1="340" y1="160" x2="340" y2="185" stroke="#1a6b38" stroke-width="1.3" stroke-dasharray="4 2" marker-end="url(#arr)"/>
 
-              <!-- Wires: sensors → ESP32 -->
               <line x1="182" y1="52"  x2="240" y2="228" stroke="#1e5fcc" stroke-width="1.3" stroke-dasharray="5 3" marker-end="url(#arr)"/>
               <line x1="182" y1="134" x2="240" y2="240" stroke="#c8933a" stroke-width="1.3" stroke-dasharray="5 3" marker-end="url(#arr)"/>
               <line x1="182" y1="216" x2="240" y2="252" stroke="#0b8f80" stroke-width="1.3" stroke-dasharray="5 3" marker-end="url(#arr)"/>
               <line x1="182" y1="298" x2="240" y2="264" stroke="#c0243a" stroke-width="1.3" stroke-dasharray="5 3" marker-end="url(#arr)"/>
 
-              <!-- ESP32 → Relay -->
               <line x1="340" y1="315" x2="430" y2="375" stroke="#6b2fc9" stroke-width="1.7" marker-end="url(#arr)"/>
 
-              <!-- Relay → Actuators -->
               <line x1="530" y1="375" x2="578" y2="162" stroke="#c05020" stroke-width="1.3" stroke-dasharray="4 3" marker-end="url(#arr)"/>
               <line x1="535" y1="376" x2="578" y2="242" stroke="#c05020" stroke-width="1.3" stroke-dasharray="4 3"/>
 
-              <!-- Power → ESP32 -->
               <line x1="312" y1="388" x2="340" y2="315" stroke="#c8933a" stroke-width="1.9" marker-end="url(#arr)"/>
             </svg>
           </div>
@@ -1023,9 +1013,6 @@
       </div>
     </section>
 
-    <!-- ══════════════════════════════════════
-         07 — VIDEO
-    ══════════════════════════════════════ -->
     <section class="section" id="video">
       <div class="container">
         <div class="section-head fade-up">
@@ -1034,12 +1021,16 @@
           <p class="lead">عرض مرئي لعمل النظام الزراعي الذكي وقراءة الحساسات على أرض الواقع.</p>
         </div>
         <div class="fade-up">
-          <div class="video-wrap">
-            <video controls>
-              <source src="abeer.mp4" type="video/mp4"/>
-              متصفحك لا يدعم تشغيل الفيديو.
-            </video>
+          
+          <div class="video-container">
+            <div class="video-wrap">
+              <video controls>
+                <source src="omar.mp4" type="video/mp4"/>
+                متصفحك لا يدعم تشغيل الفيديو.
+              </video>
+            </div>
           </div>
+
           <div class="video-actions">
             <a class="btn btn-ghost" href="#cover">↑ العودة للأعلى</a>
             <a class="btn btn-ghost" href="#thanks">التالي: الأسئلة ←</a>
@@ -1048,9 +1039,6 @@
       </div>
     </section>
 
-    <!-- ══════════════════════════════════════
-         08 — THANKS
-    ══════════════════════════════════════ -->
     <section class="section alt" id="thanks">
       <div class="container">
         <div class="thanks-wrap fade-up">
