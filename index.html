@@ -59,7 +59,7 @@
       overflow-x: hidden;
     }
 
-    /* Subtle desert-meets-nature bg texture */
+    /* خلفية متدرجة */
     body::before {
       content: '';
       position: fixed; inset: 0; pointer-events: none; z-index: 0;
@@ -263,7 +263,7 @@
     .fact-chip .fc-lbl { font-size: 0.78rem; font-weight: 700; color: var(--ink-dim); }
 
     /* ═══════════════════════════════════════
-       PROBLEM — وادي عربة التحديات
+       PROBLEM
     ═══════════════════════════════════════ */
     .problem-grid {
       display: grid; grid-template-columns: 1fr 1fr;
@@ -314,7 +314,7 @@
     }
 
     /* ═══════════════════════════════════════
-       SOLUTION — كيف يحل النظام المشكلة
+       SOLUTION
     ═══════════════════════════════════════ */
     .solution-intro {
       display: grid; grid-template-columns: 1fr 1fr;
@@ -368,37 +368,7 @@
     .rs-lbl { font-size: 0.8rem; font-weight: 700; color: var(--ink-dim); line-height: 1.4; }
 
     /* ═══════════════════════════════════════
-       HARDWARE
-    ═══════════════════════════════════════ */
-    .hw-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
-    .hw-card {
-      background: var(--panel); border: 1px solid var(--border2);
-      border-radius: var(--r); padding: 26px 22px; box-shadow: var(--sh);
-      position: relative; overflow: hidden;
-      transition: transform 200ms, box-shadow 200ms;
-    }
-    .hw-card:hover { transform: translateY(-5px); box-shadow: var(--sh-lg); }
-    .hw-card::before { content:''; position:absolute; inset-inline:0; top:0; height:4px; }
-    .hw-g::before { background: var(--green); }
-    .hw-b::before { background: var(--blue); }
-    .hw-a::before { background: var(--sand); }
-    .hw-t::before { background: var(--teal); }
-    .hw-r::before { background: var(--rose); }
-    .hw-v::before { background: var(--violet); }
-    .hw-icon { width:52px; height:52px; border-radius:10px; display:grid; place-items:center; font-size:1.5rem; margin-bottom:16px; }
-    .hw-card h3 { font-size: 0.97rem; margin-bottom: 8px; }
-    .hw-card p { font-size: 0.86rem; color:var(--ink-mid); font-weight:600; line-height:1.65; }
-    .hw-tag { margin-top:12px; display:inline-block; padding:3px 10px; border-radius:5px; font-family:var(--mono); font-size:0.68rem; font-weight:700; }
-    /* role badge */
-    .hw-role {
-      margin-top: 12px; padding: 10px 12px; border-radius: 8px;
-      font-size: 0.84rem; font-weight: 700; color: var(--ink-mid);
-      background: var(--bg2); border: 1px solid var(--border);
-      line-height: 1.55;
-    }
-
-    /* ═══════════════════════════════════════
-       HOW IT WORKS — تسلسل العمل التفصيلي
+       LOGIC
     ═══════════════════════════════════════ */
     .how-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 56px; align-items: start; }
     .logic-cards { display: grid; gap: 14px; }
@@ -445,26 +415,49 @@
     .wadi-note h3 { color: var(--sand-deep); margin-bottom: 10px; }
     .wadi-note p { font-size: 0.9rem; color: var(--sand-deep); font-weight: 600; line-height: 1.72; }
 
-    /* ═══════════════════════════════════════
-       CIRCUIT
-    ═══════════════════════════════════════ */
-    .circuit-wrap { display: grid; grid-template-columns: 1fr 300px; gap: 24px; align-items: start; }
-    .circuit-card { background: var(--panel); border: 1px solid var(--border2); border-radius: var(--r); overflow: hidden; box-shadow: var(--sh-lg); }
-    .specs-stack { display: grid; gap: 14px; }
-    .spec-box { background: var(--panel); border: 1px solid var(--border2); border-radius: var(--r); overflow: hidden; box-shadow: var(--sh); }
-    .spec-box-head { padding: 10px 16px; background: var(--bg2); border-bottom: 1px solid var(--border); font-family: var(--mono); font-size: 0.72rem; font-weight: 700; color: var(--ink-mid); }
-    .spec-row { display:flex; justify-content:space-between; align-items:center; padding:10px 16px; border-bottom:1px solid var(--border); font-size:0.85rem; }
-    .spec-row:last-child { border-bottom:none; }
-    .spec-lbl { color:var(--ink-mid); font-weight:700; }
-    .spec-val { font-family:var(--mono); font-size:0.75rem; font-weight:700; padding:3px 8px; border-radius:5px; }
-    .vg { background:var(--green-pale); color:var(--green); }
-    .vb { background:var(--blue-pale); color:var(--blue); }
-    .va { background:var(--sand-pale); color:var(--sand-deep); }
-    .vt { background:var(--teal-pale); color:var(--teal); }
-    .vv { background:var(--violet-pale); color:var(--violet); }
 
     /* ═══════════════════════════════════════
-       VIDEO SECTION (الجديد والمعدل)
+       GALLERY (معرض الصور الجديد)
+    ═══════════════════════════════════════ */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .g-card {
+      background: var(--panel);
+      border: 1px solid var(--border2);
+      border-radius: var(--r);
+      padding: 24px;
+      text-align: center;
+      box-shadow: var(--sh);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .g-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--sh-lg);
+    }
+    .g-img {
+      width: 100%;
+      height: 180px;
+      object-fit: contain; /* يحافظ على أبعاد الصورة بدون قص */
+      margin-bottom: 18px;
+      mix-blend-mode: multiply; /* يجعل الخلفيات البيضاء شفافة وتندمج مع لون البطاقة */
+    }
+    .g-title {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--ink);
+      margin-bottom: 6px;
+    }
+    .g-sub {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--ink-mid);
+    }
+
+    /* ═══════════════════════════════════════
+       VIDEO (القسم المُعدّل بناءً على طلبك - أبعاده الأصلية بالمنتصف)
     ═══════════════════════════════════════ */
     .video-container {
       display: flex;
@@ -473,10 +466,10 @@
       width: 100%;
       padding: 20px 0;
     }
-    
+
     .video-wrap {
+      /* جعلنا الحاوية تلتف حول الفيديو فقط بحجمه الطبيعي */
       display: inline-block;
-      max-width: 100%;
       border-radius: 16px;
       overflow: hidden;
       border: 4px solid var(--border2);
@@ -485,13 +478,11 @@
     }
 
     .video-wrap video {
-      display: block;
-      max-width: 100%;
-      /* تقييد أقصى ارتفاع لكي لا يكون الفيديو أطول من الشاشة */
-      max-height: 75vh;
-      width: auto;
-      height: auto;
-      object-fit: contain; /* للتأكد من عدم قص أي جزء من الفيديو */
+      display: block; /* لحذف المسافة السفلية التلقائية للفيديو */
+      max-width: 100%; /* لكي لا يتجاوز عرض الشاشة في الموبايل */
+      max-height: 75vh; /* لكي لا يكون أطول من الشاشة نفسها */
+      width: auto; /* يحافظ على عرض الفيديو الأصلي */
+      height: auto; /* يحافظ على ارتفاع الفيديو الأصلي */
     }
 
     .video-actions { display: flex; align-items: center; justify-content: center; gap: 12px; margin-top: 20px; flex-wrap: wrap; }
@@ -513,13 +504,14 @@
        RESPONSIVE
     ═══════════════════════════════════════ */
     @media (max-width: 960px) {
-      .hero-wrap, .problem-grid, .solution-intro, .how-grid, .circuit-wrap { grid-template-columns: 1fr; }
-      .hw-grid { grid-template-columns: repeat(2,1fr); }
+      .hero-wrap, .problem-grid, .solution-intro, .how-grid { grid-template-columns: 1fr; }
+      .gallery-grid { grid-template-columns: repeat(2,1fr); }
       .result-strip { grid-template-columns: repeat(2,1fr); }
       .wadi-facts { grid-template-columns: 1fr 1fr; }
     }
     @media (max-width: 600px) {
-      .hw-grid, .result-strip { grid-template-columns: 1fr; }
+      .result-strip { grid-template-columns: 1fr; }
+      .gallery-grid { grid-template-columns: 1fr; }
       .wadi-facts { grid-template-columns: 1fr 1fr; }
       h1 { font-size: 2.4rem; }
       h2 { font-size: 1.7rem; }
@@ -542,9 +534,8 @@
         <a href="#cover">الرئيسية</a>
         <a href="#problem">التحديات</a>
         <a href="#solution">الحل</a>
-        <a href="#hardware">المكونات</a>
         <a href="#logic">آلية العمل</a>
-        <a href="#circuit">الدائرة</a>
+        <a href="#gallery">معرض المكونات</a>
         <a href="#video">الفيديو</a>
         <a href="#thanks">Q&amp;A</a>
       </nav>
@@ -583,7 +574,7 @@
             <div class="hero-actions">
               <a class="btn btn-primary" href="#problem">🌱 ما هي التحديات؟</a>
               <a class="btn btn-sand"    href="#solution">💡 كيف يعمل النظام؟</a>
-              <a class="btn btn-ghost"   href="#video">▶ الفيديو</a>
+              <a class="btn btn-ghost"   href="#gallery">📸 صور القطع</a>
             </div>
 
             <div class="hero-stats">
@@ -781,64 +772,10 @@
       </div>
     </section>
 
-    <section class="section alt" id="hardware">
+    <section class="section alt" id="logic">
       <div class="container">
         <div class="section-head fade-up">
-          <div class="kicker">04 — المكونات</div>
-          <h2>قلب النظام — المكونات الإلكترونية</h2>
-          <p class="lead">ستة مكونات تعمل معاً لتحويل التربة إلى نظام ذكي يتحدث مع المزارع.</p>
-        </div>
-        <div class="hw-grid">
-          <article class="hw-card hw-g fade-up">
-            <div class="hw-icon" style="background:var(--green-pale)">🧠</div>
-            <h3>ESP32 — المتحكم الرئيسي</h3>
-            <p>دماغ النظام. يستقبل القراءات من جميع الحساسات، يحلّلها، ويتصل بالإنترنت عبر WiFi مدمج لرفع البيانات والحصول على الأوامر.</p>
-            <div class="hw-role">🔧 يتحكم في كل شيء — الحساسات والمضخات والاتصال السحابي معاً.</div>
-            <span class="hw-tag" style="background:var(--green-pale);color:var(--green)">240MHz · WiFi · Bluetooth</span>
-          </article>
-          <article class="hw-card hw-b fade-up">
-            <div class="hw-icon" style="background:var(--blue-pale)">💧</div>
-            <h3>Soil Moisture Sensor</h3>
-            <p>حساس الرطوبة يُدفن في منطقة الجذور ليقرأ نسبة الماء الفعلية في التربة — لا خمنة ولا تقدير.</p>
-            <div class="hw-role">📍 متى الرطوبة تحت 35% → تُشغَّل المضخة فوراً.</div>
-            <span class="hw-tag" style="background:var(--blue-pale);color:var(--blue)">Analog PIN 34</span>
-          </article>
-          <article class="hw-card hw-a fade-up">
-            <div class="hw-icon" style="background:var(--sand-pale)">⚡</div>
-            <h3>EC Sensor — حساس الملوحة</h3>
-            <p>يقيس الموصلية الكهربائية للتربة، وهي مؤشر مباشر لتركيز الأملاح. ارتفاع EC يعني خطر الجفاف الفسيولوجي.</p>
-            <div class="hw-role">⚠️ EC فوق 2.0 mS → تنبيه فوري + بدء غسيل الأملاح.</div>
-            <span class="hw-tag" style="background:var(--sand-pale);color:var(--sand-deep)">0–20 mS/cm · PIN 35</span>
-          </article>
-          <article class="hw-card hw-t fade-up">
-            <div class="hw-icon" style="background:var(--teal-pale)">🧪</div>
-            <h3>pH Sensor — حساس الحموضة</h3>
-            <p>يراقب حموضة التربة باستمرار لضمان بقائها في النطاق المثالي (6.0–7.0) حيث يمتص النبات كل العناصر الغذائية بأعلى كفاءة.</p>
-            <div class="hw-role">🔬 pH خارج النطاق → تعديل تلقائي في محلول الري.</div>
-            <span class="hw-tag" style="background:var(--teal-pale);color:var(--teal)">Range 0–14 · PIN 36</span>
-          </article>
-          <article class="hw-card hw-r fade-up">
-            <div class="hw-icon" style="background:var(--rose-pale)">🌡️</div>
-            <h3>DHT22 — حساس الحرارة والرطوبة</h3>
-            <p>يقيس حرارة الهواء ورطوبته النسبية لتصحيح معادلات الاحتياج المائي حسب الطقس الفعلي في وادي عربة.</p>
-            <div class="hw-role">🌤️ حرارة عالية = زيادة تلقائية في كمية الري اليومية.</div>
-            <span class="hw-tag" style="background:var(--rose-pale);color:var(--rose)">±0.5°C · PIN 4</span>
-          </article>
-          <article class="hw-card hw-v fade-up">
-            <div class="hw-icon" style="background:var(--violet-pale)">⚙️</div>
-            <h3>Relay Module + مضخات المياه</h3>
-            <p>وحدة المرحلات تتلقى الأوامر من ESP32 وتُشغّل مضخات الري والتسميد (Fertigation) وفق الحاجة الفعلية المحسوبة.</p>
-            <div class="hw-role">💦 تشغيل المضخة بالثانية بالكمية المطلوبة فقط — لا زيادة.</div>
-            <span class="hw-tag" style="background:var(--violet-pale);color:var(--violet)">4-Channel · 12V · GPIO 25-27</span>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="logic">
-      <div class="container">
-        <div class="section-head fade-up">
-          <div class="kicker">05 — آلية العمل</div>
+          <div class="kicker">04 — آلية العمل</div>
           <h2>منطق النظام — متى يتحرك وكيف؟</h2>
           <p class="lead">النظام يعمل بمعايير علمية دقيقة مُبرمجة مسبقاً، مع مراعاة ظروف وادي عربة تحديداً.</p>
         </div>
@@ -906,122 +843,65 @@
       </div>
     </section>
 
-    <section class="section alt" id="circuit">
+    <section class="section" id="gallery">
       <div class="container">
         <div class="section-head fade-up">
-          <div class="kicker">06 — الدائرة</div>
-          <h2>البنية الإلكترونية وتوصيلات النظام</h2>
-          <p class="lead">مخطط هندسي يوضح كيف تتصل الحساسات بمتحكم ESP32 ووحدة التحكم في المضخات.</p>
+          <div class="kicker">05 — معرض المكونات</div>
+          <h2>الأشكال الواقعية للمكونات المستخدمة</h2>
+          <p class="lead">صور حقيقية للحساسات والقطع الإلكترونية التي تم استخدامها في بناء النظام الزراعي الذكي.</p>
         </div>
-        <div class="circuit-wrap fade-up">
-          <div class="circuit-card">
-            <svg viewBox="0 0 680 500" xmlns="http://www.w3.org/2000/svg" style="background:#f4f9f5;display:block;width:100%">
-              <defs>
-                <pattern id="gg" width="22" height="22" patternUnits="userSpaceOnUse">
-                  <path d="M22 0L0 0 0 22" fill="none" stroke="rgba(26,107,56,0.07)" stroke-width="0.5"/>
-                </pattern>
-                <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
-                  <path d="M2 2L8 5L2 8" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round"/>
-                </marker>
-              </defs>
-              <rect width="680" height="500" fill="url(#gg)"/>
 
-              <rect x="240" y="185" width="200" height="130" rx="10" fill="#e4f5ec" stroke="#1a6b38" stroke-width="2"/>
-              <text x="340" y="232" text-anchor="middle" font-family="Cairo,sans-serif" font-size="15" font-weight="900" fill="#1a6b38">ESP32</text>
-              <text x="340" y="251" text-anchor="middle" font-family="Space Mono,monospace" font-size="9" fill="#2e5239">MICROCONTROLLER</text>
-              <text x="340" y="268" text-anchor="middle" font-family="Space Mono,monospace" font-size="9" fill="#2e5239">WiFi 2.4GHz · 240MHz</text>
-              <text x="340" y="285" text-anchor="middle" font-family="Space Mono,monospace" font-size="9" fill="#2e5239">4MB Flash · GPIO 34+</text>
-              <text x="340" y="304" text-anchor="middle" font-family="Space Mono,monospace" font-size="9" fill="#22913f">● ONLINE — وادي عربة</text>
+        <div class="gallery-grid fade-up">
 
-              <rect x="22" y="26"  width="160" height="52" rx="8" fill="#dce8fb" stroke="#1e5fcc" stroke-width="1.3"/>
-              <text x="102" y="46"  text-anchor="middle" font-family="Cairo,sans-serif"    font-size="12" font-weight="800" fill="#1e5fcc">حساس الرطوبة</text>
-              <text x="102" y="64"  text-anchor="middle" font-family="Space Mono,monospace" font-size="9"  fill="#1e5fcc">Moisture → PIN 34</text>
-
-              <rect x="22" y="108" width="160" height="52" rx="8" fill="#fdf2dc" stroke="#c8933a" stroke-width="1.3"/>
-              <text x="102" y="128" text-anchor="middle" font-family="Cairo,sans-serif"    font-size="12" font-weight="800" fill="#8c5e18">حساس الملوحة EC</text>
-              <text x="102" y="146" text-anchor="middle" font-family="Space Mono,monospace" font-size="9"  fill="#c8933a">EC Probe → PIN 35</text>
-
-              <rect x="22" y="190" width="160" height="52" rx="8" fill="#dcf5f2" stroke="#0b8f80" stroke-width="1.3"/>
-              <text x="102" y="210" text-anchor="middle" font-family="Cairo,sans-serif"    font-size="12" font-weight="800" fill="#0b8f80">حساس الحموضة pH</text>
-              <text x="102" y="228" text-anchor="middle" font-family="Space Mono,monospace" font-size="9"  fill="#0b8f80">pH Probe → PIN 36</text>
-
-              <rect x="22" y="272" width="160" height="52" rx="8" fill="#fde4e8" stroke="#c0243a" stroke-width="1.3"/>
-              <text x="102" y="292" text-anchor="middle" font-family="Cairo,sans-serif"    font-size="12" font-weight="800" fill="#c0243a">حساس الحرارة</text>
-              <text x="102" y="310" text-anchor="middle" font-family="Space Mono,monospace" font-size="9"  fill="#c0243a">DHT22 → PIN 4</text>
-
-              <rect x="498" y="26"  width="160" height="52" rx="8" fill="#fff4e6" stroke="#c05020" stroke-width="1.3"/>
-              <text x="578" y="46"  text-anchor="middle" font-family="Cairo,sans-serif"    font-size="12" font-weight="800" fill="#a03010">مضخة الري الرئيسية</text>
-              <text x="578" y="64"  text-anchor="middle" font-family="Space Mono,monospace" font-size="9"  fill="#c05020">Relay CH1 → 12V DC</text>
-
-              <rect x="498" y="108" width="160" height="52" rx="8" fill="#fff4e6" stroke="#c05020" stroke-width="1.3"/>
-              <text x="578" y="128" text-anchor="middle" font-family="Cairo,sans-serif"    font-size="12" font-weight="800" fill="#a03010">صمام التسميد</text>
-              <text x="578" y="146" text-anchor="middle" font-family="Space Mono,monospace" font-size="9"  fill="#c05020">Fertigation → CH2</text>
-
-              <rect x="498" y="190" width="160" height="52" rx="8" fill="#fff4e6" stroke="#c05020" stroke-width="1.3"/>
-              <text x="578" y="210" text-anchor="middle" font-family="Cairo,sans-serif"    font-size="12" font-weight="800" fill="#a03010">مضخة تصحيح pH</text>
-              <text x="578" y="228" text-anchor="middle" font-family="Space Mono,monospace" font-size="9"  fill="#c05020">pH Correct → CH3</text>
-
-              <rect x="356" y="375" width="174" height="80" rx="8" fill="#ece4fb" stroke="#6b2fc9" stroke-width="1.5"/>
-              <text x="443" y="402" text-anchor="middle" font-family="Cairo,sans-serif"    font-size="13" font-weight="800" fill="#6b2fc9">Relay Module</text>
-              <text x="443" y="419" text-anchor="middle" font-family="Space Mono,monospace" font-size="9"  fill="#6b2fc9">4-Channel · 5V Input</text>
-              <text x="443" y="436" text-anchor="middle" font-family="Space Mono,monospace" font-size="9"  fill="#6b2fc9">GPIO 25, 26, 27</text>
-
-              <rect x="154" y="388" width="158" height="58" rx="8" fill="#fdf2dc" stroke="#c8933a" stroke-width="1.5"/>
-              <text x="233" y="413" text-anchor="middle" font-family="Cairo,sans-serif"    font-size="12" font-weight="800" fill="#8c5e18">مصدر الطاقة</text>
-              <text x="233" y="430" text-anchor="middle" font-family="Space Mono,monospace" font-size="9"  fill="#c8933a">12V → Buck → 5V</text>
-
-              <text x="340" y="154" text-anchor="middle" font-family="Space Mono,monospace" font-size="9" fill="#1a6b38">↑  WiFi  →  IoT Dashboard  →  هاتف المزارع</text>
-              <line x1="340" y1="160" x2="340" y2="185" stroke="#1a6b38" stroke-width="1.3" stroke-dasharray="4 2" marker-end="url(#arr)"/>
-
-              <line x1="182" y1="52"  x2="240" y2="228" stroke="#1e5fcc" stroke-width="1.3" stroke-dasharray="5 3" marker-end="url(#arr)"/>
-              <line x1="182" y1="134" x2="240" y2="240" stroke="#c8933a" stroke-width="1.3" stroke-dasharray="5 3" marker-end="url(#arr)"/>
-              <line x1="182" y1="216" x2="240" y2="252" stroke="#0b8f80" stroke-width="1.3" stroke-dasharray="5 3" marker-end="url(#arr)"/>
-              <line x1="182" y1="298" x2="240" y2="264" stroke="#c0243a" stroke-width="1.3" stroke-dasharray="5 3" marker-end="url(#arr)"/>
-
-              <line x1="340" y1="315" x2="430" y2="375" stroke="#6b2fc9" stroke-width="1.7" marker-end="url(#arr)"/>
-
-              <line x1="530" y1="375" x2="578" y2="162" stroke="#c05020" stroke-width="1.3" stroke-dasharray="4 3" marker-end="url(#arr)"/>
-              <line x1="535" y1="376" x2="578" y2="242" stroke="#c05020" stroke-width="1.3" stroke-dasharray="4 3"/>
-
-              <line x1="312" y1="388" x2="340" y2="315" stroke="#c8933a" stroke-width="1.9" marker-end="url(#arr)"/>
-            </svg>
+          <div class="g-card">
+            <img src="imageAlaa/esp.webp" alt="متحكم ESP32" class="g-img">
+            <div class="g-title">متحكم ESP32</div>
+            <div class="g-sub">وحدة المعالجة الأساسية المدمجة مع WiFi لتلقي البيانات وإرسالها للسحابة.</div>
           </div>
 
-          <div class="specs-stack">
-            <div class="spec-box">
-              <div class="spec-box-head">🔌 توصيلات الحساسات</div>
-              <div class="spec-row"><span class="spec-lbl">رطوبة التربة</span><span class="spec-val vb">PIN 34</span></div>
-              <div class="spec-row"><span class="spec-lbl">ملوحة EC</span>    <span class="spec-val va">PIN 35</span></div>
-              <div class="spec-row"><span class="spec-lbl">حموضة pH</span>    <span class="spec-val vt">PIN 36</span></div>
-              <div class="spec-row"><span class="spec-lbl">حرارة DHT22</span> <span class="spec-val vv">PIN 4</span></div>
-            </div>
-            <div class="spec-box">
-              <div class="spec-box-head">⚙️ التحكم بالمشغّلات</div>
-              <div class="spec-row"><span class="spec-lbl">مضخة الري</span>   <span class="spec-val vg">Relay CH1</span></div>
-              <div class="spec-row"><span class="spec-lbl">التسميد</span>      <span class="spec-val vg">Relay CH2</span></div>
-              <div class="spec-row"><span class="spec-lbl">تصحيح pH</span>    <span class="spec-val vg">Relay CH3</span></div>
-            </div>
-            <div class="spec-box">
-              <div class="spec-box-head">⚡ الطاقة والاتصال</div>
-              <div class="spec-row"><span class="spec-lbl">المضخات</span>      <span class="spec-val va">12V DC</span></div>
-              <div class="spec-row"><span class="spec-lbl">ESP32</span>         <span class="spec-val vt">5V USB</span></div>
-              <div class="spec-row"><span class="spec-lbl">البروتوكول</span>   <span class="spec-val vv">WiFi 2.4G</span></div>
-              <div class="spec-row"><span class="spec-lbl">السحابة</span>       <span class="spec-val vg">MQTT / HTTP</span></div>
-            </div>
+          <div class="g-card">
+            <img src="imageAlaa/soilmoisturesensor.webp" alt="حساس رطوبة التربة" class="g-img">
+            <div class="g-title">حساس رطوبة التربة</div>
+            <div class="g-sub">مجس سَعَوي (Capacitive) مضاد للصدأ لقياس المحتوى المائي الدقيق للتربة.</div>
           </div>
+
+          <div class="g-card">
+            <img src="imageAlaa/ECsensor.webp" alt="حساس الملوحة" class="g-img">
+            <div class="g-title">حساس الملوحة (EC)</div>
+            <div class="g-sub">مجس الموصلية الكهربائية لقياس تراكم الأملاح لمنع الجفاف الفسيولوجي.</div>
+          </div>
+
+          <div class="g-card">
+            <img src="imageAlaa/pH.webp" alt="حساس الحموضة" class="g-img">
+            <div class="g-title">حساس الحموضة (pH)</div>
+            <div class="g-sub">مجس دقيق لقياس التوازن الكيميائي للتربة وضمان امتصاص الأسمدة.</div>
+          </div>
+
+          <div class="g-card">
+            <img src="imageAlaa/Temperaturesensor.webp" alt="حساس الحرارة والرطوبة" class="g-img">
+            <div class="g-title">حساس الحرارة والرطوبة</div>
+            <div class="g-sub">موديل DHT22 لمراقبة مناخ المزرعة الخارجي ومعدلات التبخر المتوقعة.</div>
+          </div>
+
+          <div class="g-card">
+            <img src="imageAlaa/Relay.png" alt="وحدة المرحلات" class="g-img">
+            <div class="g-title">وحدة المرحلات (Relays)</div>
+            <div class="g-sub">تعمل كبوابات للتحكم بتشغيل وإطفاء مضخات المياه والأسمدة الثقيلة.</div>
+          </div>
+
         </div>
       </div>
     </section>
 
-    <section class="section" id="video">
+    <section class="section alt" id="video">
       <div class="container">
         <div class="section-head fade-up">
-          <div class="kicker">07 — الفيديو</div>
+          <div class="kicker">06 — الفيديو</div>
           <h2>فيديو توضيحي</h2>
           <p class="lead">عرض مرئي لعمل النظام الزراعي الذكي وقراءة الحساسات على أرض الواقع.</p>
         </div>
         <div class="fade-up">
-          
+
           <div class="video-container">
             <div class="video-wrap">
               <video controls>
@@ -1039,10 +919,10 @@
       </div>
     </section>
 
-    <section class="section alt" id="thanks">
+    <section class="section" id="thanks">
       <div class="container">
         <div class="thanks-wrap fade-up">
-          <div class="kicker" style="justify-content:center">08 — Q&amp;A</div>
+          <div class="kicker" style="justify-content:center">07 — Q&amp;A</div>
           <h2>شكراً لوقتكم الكريم 🌿</h2>
           <p class="lead" style="margin-bottom:28px;">
             وصلنا لنهاية العرض — يسعدني الإجابة على أي سؤال ببالكم حول التحديات والحلول وتطبيق النظام في وادي عربة.
@@ -1068,7 +948,7 @@
       bar.style.width = Math.min(100, window.scrollY / (document.documentElement.scrollHeight - innerHeight) * 100) + '%';
     }, { passive: true });
 
-    // Fade-up
+    // Fade-up animation
     const fadeObs = new IntersectionObserver(
       entries => entries.forEach(e => e.isIntersecting && e.target.classList.add('in-view')),
       { threshold: 0.09 }
@@ -1086,7 +966,7 @@
     }, { rootMargin: '-45% 0px -45% 0px' });
     sections.forEach(s => navObs.observe(s));
 
-    // Keyboard nav
+    // Keyboard nav (up / down)
     document.addEventListener('keydown', e => {
       const cur = sections.findIndex(s => {
         const r = s.getBoundingClientRect();
